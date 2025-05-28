@@ -2,26 +2,16 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
+
 import { CopyIcon } from "lucide-react";
 
-type OutputComponentProps = {
-  html?: string;
-  css?: string;
-  js?: string;
-  title?: string;
-};
 
-const OutputComponent = ({ 
-  html = "", 
-  css = "", 
-  js = "", 
-  title = "Output" 
-}: OutputComponentProps) => {
+
+const OutputComponent = () => {
   const [copied, setCopied] = useState(false);
 
   // Default example content
-  const exampleHtml = html || `
+  const exampleHtml =  `
 <div class="card">
   <div class="card-header">
     <h2>Welcome to My App</h2>
@@ -36,7 +26,7 @@ const OutputComponent = ({
 </div>
   `.trim();
 
-  const exampleCss = css || `
+  const exampleCss =  `
 .card {
   font-family: 'Arial', sans-serif;
   width: 300px;
@@ -64,7 +54,7 @@ const OutputComponent = ({
 }
   `.trim();
 
-  const exampleJs = js || `
+  const exampleJs =  `
 document.getElementById('demo-btn').addEventListener('click', () => {
   alert('Button clicked!');
 });
@@ -145,7 +135,7 @@ document.getElementById('demo-btn').addEventListener('click', () => {
           fontSize: '0.875rem',
           fontWeight: 600,
           color: '#1e293b'
-        }}>{title}</h3>
+        }}>Output</h3>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button
             onClick={copyToClipboard}
