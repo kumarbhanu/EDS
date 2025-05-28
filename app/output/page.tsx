@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { CopyIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -114,121 +115,50 @@ document.getElementById('demo-btn').addEventListener('click', () => {
   };
 
   return (
-    <div style={{
-      border: '1px solid #e2e8f0',
-      borderRadius: '0.5rem',
-      overflow: 'hidden',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-      margin: '1rem 0',
-      backgroundColor: 'white'
-    }}>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '0.75rem 1rem',
-        backgroundColor: '#f8fafc',
-        borderBottom: '1px solid #e2e8f0'
-      }}>
-        <h3 style={{
-          margin: 0,
-          fontSize: '0.875rem',
-          fontWeight: 600,
-          color: '#1e293b'
-        }}>Output</h3>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button
+    <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm my-4 bg-white">
+      <div className="bg-blue-100 flex justify-between items-center px-3 py-2 border-b border-gray-200 mb-10">
+        <h3 className="text-lg font-semibold text-gray-800 text-center">output</h3>
+        <div className="flex gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={copyToClipboard}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.25rem',
-              padding: '0.25rem 0.5rem',
-              backgroundColor: 'transparent',
-              border: '1px solid #cbd5e1',
-              borderRadius: '0.25rem',
-              fontSize: '0.75rem',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              color: '#334155'
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#f1f5f9')}
-            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            className="h-8 px-2 text-xs text-gray-700 hover:bg-gray-100 gap-1"
           >
-            <CopyIcon style={{ width: '0.875rem', height: '0.875rem' }} />
+            <CopyIcon className="h-3.5 w-3.5" />
             {copied ? "Copied!" : "Copy"}
-          </button>
+          </Button>
         </div>
       </div>
 
-      <Tabs defaultValue="preview" style={{ width: '100%' }}>
-        <TabsList style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          width: '100%',
-          backgroundColor: '#f8fafc',
-          borderBottom: '1px solid #e2e8f0'
-        }}>
-          <TabsTrigger value="code" style={{
-            padding: '0.5rem',
-            fontSize: '0.75rem',
-            fontWeight: 500,
-            color: '#64748b',
-            cursor: 'pointer',
-            textAlign: 'center',
-            borderBottom: '2px solid transparent',
-            transition: 'all 0.2s'
-          }}>
+      <Tabs defaultValue="preview" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 bg-gray-50 border-b border-gray-200">
+          <TabsTrigger 
+            value="code" 
+            className="text-xs font-medium text-gray-500 data-[state=active]:text-gray-900 data-[state=active]:border-b-2 data-[state=active]:border-gray-900 py-2 transition-colors"
+          >
             Code
           </TabsTrigger>
-          <TabsTrigger value="preview" style={{
-            padding: '0.5rem',
-            fontSize: '0.75rem',
-            fontWeight: 500,
-            color: '#64748b',
-            cursor: 'pointer',
-            textAlign: 'center',
-            borderBottom: '2px solid transparent',
-            transition: 'all 0.2s'
-          }}>
+          <TabsTrigger 
+            value="preview" 
+            className="text-xs font-medium text-gray-500 data-[state=active]:text-gray-900 data-[state=active]:border-b-2 data-[state=active]:border-gray-900 py-2 transition-colors"
+          >
             Preview
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="code" style={{ margin: 0 }}>
-          <div style={{ 
-            maxHeight: '500px',
-            overflow: 'auto',
-            backgroundColor: '#1e1e1e',
-            padding: '1rem',
-            fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace',
-            fontSize: '0.875rem',
-            lineHeight: '1.5'
-          }}>
-            <pre style={{ 
-              margin: 0,
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              color: '#d4d4d4'
-            }}>
+        <TabsContent value="code" className="m-0">
+          <div className="max-h-[500px] overflow-auto bg-[#1e1e1e] p-4 font-mono text-sm leading-relaxed">
+            <pre className="m-0 whitespace-pre-wrap break-words text-[#d4d4d4]">
               <code dangerouslySetInnerHTML={{ __html: highlightSyntax(fullCode) }} />
             </pre>
           </div>
         </TabsContent>
 
-        <TabsContent value="preview" style={{ 
-          margin: 0,
-          // height: '800px',
-          backgroundColor: 'white'
-        }}>
+        <TabsContent value="preview" className="m-0 h-[800px] bg-white">
           <iframe
             srcDoc={fullCode}
-            style={{
-              width: '100%',
-              height: '100%',
-              border: 'none',
-              backgroundColor: 'white'
-            }}
+            className="w-full h-full border-0 bg-white"
             sandbox="allow-scripts allow-same-origin"
             title="Preview"
           />

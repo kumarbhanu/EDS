@@ -6,6 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+
 
 
 export default function WebsiteTransformer() {
@@ -15,11 +17,12 @@ export default function WebsiteTransformer() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
+const router=useRouter()
   const handleFileUpload = (files: FileList | null) => {
     if (files) {
       setUploadedFiles(Array.from(files));
     }
+    router.push('/output')
   };
 
   const transformFromUrl = async () => {
@@ -41,6 +44,7 @@ export default function WebsiteTransformer() {
       
       const filename = urlInput.split("/").pop() || "url_page.html";
       setSuccess(`Successfully transformed website from URL: ${filename}`);
+        router.push('/output')
     } catch (err) {
       setError(`Error processing URL: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {

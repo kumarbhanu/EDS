@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+
 
 type ComponentRequest = {
   type: "Button" | "Radio Button" | "Dropdown" | null;
@@ -28,6 +30,7 @@ type ComponentRequest = {
 export default function ComponentGenerator() {
   const [componentRequests, setComponentRequests] = useState<ComponentRequest[]>([]);
   const [generatedComponents, setGeneratedComponents] = useState<string[]>([]);
+  const router=useRouter()
 
   const addComponent = () => {
     setComponentRequests([...componentRequests, { type: null, details: {} }]);
@@ -73,6 +76,7 @@ export default function ComponentGenerator() {
     }).filter(prompt => prompt !== "");
 
     setGeneratedComponents(prompts);
+     router.push('/output')
  
   };
 
